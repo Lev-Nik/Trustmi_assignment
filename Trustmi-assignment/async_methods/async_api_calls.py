@@ -48,8 +48,10 @@ async def find_vms_async(vm_id, rules, vms_cache, env_data):
                 total_vms = manager.list()
                 tags_length = len(vm['tags'])
                 # setting the number of wanted processes
-                n = tags_length%n_proc
-                if n == 0: n = n_proc 
+                if tags_length/n_proc > 1:
+                    n = n_proc
+                else:
+                    n = tags_length%n_proc
                 # creating a processes pool
                 pool = Pool(processes=n)
                 for i in range(n):
