@@ -31,7 +31,7 @@ class json_file_loader(loader):
             # getting the cpu count on the computer
             n_proc = cpu_count()
             # setting the number of processes
-            if len(env_data['fw_rules'])%n_proc:
+            if len(env_data['fw_rules'])/n_proc > 1:
                 n = n_proc
             else:
                 n = len(env_data['fw_rules'])%n_proc
