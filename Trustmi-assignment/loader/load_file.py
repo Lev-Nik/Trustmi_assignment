@@ -31,8 +31,10 @@ class json_file_loader(loader):
             # getting the cpu count on the computer
             n_proc = cpu_count()
             # setting the number of processes
-            n = len(env_data['fw_rules'])%n_proc
-            if n == 0: n = n_proc 
+            if len(env_data['fw_rules'])%n_proc:
+                n = n_proc
+            else:
+                n = len(env_data['fw_rules'])%n_proc
             # setting a processes pool
             pool = Pool(processes=n)
             # creating a processes to process the env data rules and build dictionary of tag and tags that can access that tag
